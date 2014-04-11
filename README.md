@@ -7,12 +7,10 @@
 ####Heading 4
 
 ```html
-
 <div class="awesome">
   <div>
   <div>
 </div>
-
 ```
 
 ```css
@@ -34,6 +32,7 @@ preprocessor in use. The following guidelines are in reference to Sass.
 * List Item
 * List Item
 * List Item
+* [Projects](/sections/accessibilityins.md)
   
 ```scss
 
