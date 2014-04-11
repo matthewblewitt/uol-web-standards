@@ -2,6 +2,8 @@
 
 ##Introduction
 
+These collection of documents are to be used as a reference for front-end developers as the University of Leeds. Each main topic has been broken down into a seperate subfolder.
+
 ### Table of Contents
 
 * [Accessibility](/accessibility/)

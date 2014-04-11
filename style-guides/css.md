@@ -1,8 +1,15 @@
 #CSS Style Guide
 
+This document defines formatting and style rules CSS. It aims at improving collaboration, code quality, and enabling supporting infrastructure. It applies to raw, working files CSS. Tools are free to obfuscate, minify, and compile as long as the general code quality is maintained.
+
+
 ###Table of Contents
 
 * [BEM Syntax](#bem-syntax)
+* [Style Rules](#style-rules)
+	* [Style Rules](#style-rules)
+* [CSS Formatting Rules](#css-formatting-rules)
+* [CSS Meta Rules](#css-meta-rules)
 
 ##BEM Syntax
 
@@ -50,6 +57,7 @@ When you are using BEM, though, it is important to remember that you don’t nee
 ```
 
 Here we have our logo; it could be BEMmed up like so:
+
 ```css
 .header {}
 .header__logo {}
@@ -61,4 +69,419 @@ But that is unecessary. The trick with BEM is knowing when something falls into 
 
 * [MindBEMding – getting your head ’round BEM syntax](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)
 * [About HTML semantics and front-end architecture](http://nicolasgallagher.com/about-html-semantics-front-end-architecture/)
+
+***
+
+##Style Rules
+
+###ID and Class Naming
+
+Use meaningful or generic ID and class names.
+Instead of presentational or cryptic names, always use ID and class names that reflect the purpose of the element in question, or that are otherwise generic.
+
+Names that are specific and reflect the purpose of the element should be preferred as these are most understandable and the least likely to change.
+
+Generic names are simply a fallback for elements that have no particular or no meaning different from their siblings. They are typically needed as “helpers.”
+
+Using functional or generic names reduces the probability of unnecessary document or template changes.
+
+```css
+/* Not recommended: meaningless */
+#yee-1901 {}
+
+/* Not recommended: presentational */
+.button-green {}
+.clear {}
+
+/* Recommended: specific */
+#gallery {}
+#login {}
+.video {}
+
+/* Recommended: generic */
+.aux {}
+.alt {}
+```
+
+###ID and Class Name Style
+
+Use ID and class names that are as short as possible but as long as necessary.
+Try to convey what an ID or class is about while being as brief as possible.
+
+Using ID and class names this way contributes to acceptable levels of understandability and code efficiency.
+
+```css
+/* Not recommended */
+#navigation {}
+.atr {}
+/* Recommended */
+#nav {}
+.author {}
+```
+###Type Selectors
+
+Avoid qualifying ID and class names with type selectors.
+Unless necessary (for example with helper classes), do not use element names in conjunction with IDs or classes.
+
+Avoiding unnecessary ancestor selectors is useful for performance reasons.
+
+```css
+/* Not recommended */
+ul#example {}
+div.error {}
+
+/* Recommended */
+#example {}
+.error {}
+```
+###Shorthand Properties
+
+Use shorthand properties where possible.
+CSS offers a variety of shorthand properties (like font) that should be used whenever possible, even in cases where only one value is explicitly set.
+
+Using shorthand properties is useful for code efficiency and understandability.
+
+```css
+.class {
+	/* Not recommended */
+	border-top-style: none;
+	font-family: palatino, georgia, serif;
+	font-size: 100%;
+	line-height: 1.6;
+	padding-bottom: 2em;
+	padding-left: 1em;
+	padding-right: 1em;
+	padding-top: 0;
+
+	/* Recommended */
+	border-top: 0;
+	font: 100%/1.6 palatino, georgia, serif;
+	padding: 0 1em 2em;
+}
+```
+
+###0 and Units
+
+Omit unit specification after “0” values.
+Do not use units after 0 values unless they are required.
+
+```css
+.class {
+	margin: 0;
+	padding: 0;
+}
+```
+
+###Leading 0s
+
+Omit leading “0”s in values.
+Do not use put 0s in front of values or lengths between -1 and 1.
+
+```css
+.class {
+	font-size: .8em;
+}
+```
+
+###Hexadecimal Notation
+
+Use 3 character hexadecimal notation where possible.
+For color values that permit it, 3 character hexadecimal notation is shorter and more succinct.
+
+```css
+.class {
+	/* Not recommended */
+	color: #eebbcc;
+	/* Recommended */
+	color: #ebc;
+}
+```
+
+###Prefixes
+
+Prefix selectors with an application-specific prefix (optional).
+In large projects as well as for code that gets embedded in other projects or on external sites use prefixes (as namespaces) for ID and class names. Use short, unique identifiers followed by a dash.
+
+Using namespaces helps preventing naming conflicts and can make maintenance easier, for example in search and replace operations.
+
+```css
+.adw-help {} /* AdWords */
+#maia-note {} /* Maia */
+```
+
+###ID and Class Name Delimiters
+
+Separate words in ID and class names by a hyphen.
+Do not concatenate words and abbreviations in selectors by any characters (including none at all) other than hyphens, in order to improve understanding and scannability.
+
+```css
+/* Not recommended: does not separate the words “demo” and “image” */
+.demoimage {}
+
+/* Not recommended: uses underscore instead of hyphen */
+.error_status {}
+/* Recommended */
+#video-id {}
+.ads-sample {}
+```
+
+###Comments
+
+####Table of contents
+
+At the top of my CSS files I have a table of contents that maps to the section titles in the document, it looks a little like:
+
+```css
+/*------------------------------------*\
+    CONTENTS
+\*------------------------------------*/
+/*
+NOTES
+RESET
+SHARED     Share anything we can across elements.
+MAIN       HTML, BODY, etc.
+*/
+
+```
+
+####Section titles
+
+I denote each section (layout, type, tables etc) of my CSS thus:
+
+```css
+/*------------------------------------*\
+    $MAIN
+\*------------------------------------*/
+```
+
+This section heading is also prepended with a $. This is so that--when I do a find for a section--I actually do a find for $MAIN and not MAIN. This means that I’m only ever searching within section headings. A search for $MAIN will only ever find me a section with that name whereas a search for MAIN could find me something like:
+
+```css
+.s{
+    background-image:url(/img/css/sprites/main.png);
+}
+```
+
+Being able to search just in the scope of headings is very, very useful.
+
+I also leave five carriage returns between each section, for example:
+
+```css
+/*------------------------------------*\
+    $MAIN
+\*------------------------------------*/
+```
+    
+```css    
+/*------------------------------------*\
+    $TYPE
+\*------------------------------------*/
+```
+
+This means that when scrolling quickly through my stylesheet I know that any gaps in the code are likely to be new sections.
+
+
+###Hacks
+
+Avoid user agent detection as well as CSS “hacks”—try a different approach first.
+It’s tempting to address styling differences over user agent detection or special CSS filters, workarounds, and hacks. Both approaches should be considered last resort in order to achieve and maintain an efficient and manageable code base. Put another way, giving detection and hacks a free pass will hurt projects in the long run as projects tend to take the way of least resistance. That is, allowing and making it easy to use detection and hacks means using detection and hacks more frequently—and more frequently is too frequently.
+
+##CSS Formatting Rules
+
+###Declaration Order
+
+Alphabetize declarations.
+Put declarations in alphabetical order in order to achieve consistent code in a way that is easy to remember and maintain.
+
+```css
+.class{
+	background: fuchsia;
+	border: 1px solid;
+	-webkit-border-radius: 4px;
+	   -moz-border-radius: 4px;
+	        border-radius: 4px;
+	color: black;
+	text-align: center;
+	text-indent: 2em;
+}
+```
+
+###Vendor prefixes
+
+Write vendor prefixes so that the values all line up vertically; this makes them quicker to scan and compare values.
+
+```css
+.island{
+    padding:1.5em;
+    margin-bottom:1.5em;
+    -webkit-border-radius:4px;
+       -moz-border-radius:4px;
+            border-radius:4px;
+}
+```
+
+###Block Content Indentation
+
+Indent all block content.
+Indent all block content, that is rules within rules as well as declarations, so to reflect hierarchy and improve understanding.
+
+```css
+@media screen, projection {
+	html {
+		background: #fff;
+		color: #444;
+	}
+}
+```
+
+###Declaration Stops
+
+Use a semicolon after every declaration.
+End every declaration with a semicolon for consistency and extensibility reasons.
+
+```css
+/* Not recommended */
+.test {
+	display: block;
+	height: 100px
+}
+/* Recommended */
+.test {
+	display: block;
+ 	height: 100px;
+}
+```
+
+###Property Name Stops
+
+Use a space after a property name’s colon.
+Always use a single space between property and value (but no space between property and colon) for consistency reasons.
+
+```css
+/* Not recommended */
+h3 {
+	font-weight:bold;
+}
+/* Recommended */
+h3 {
+ 	font-weight: bold;
+}
+```
+
+###Declaration Block Separation
+
+Use a space between the last selector and the declaration block.
+Always use a single space between the last selector and the opening brace that begins the declaration block.
+
+The opening brace should be on the same line as the last selector in a given rule.
+
+```css
+/* Not recommended: missing space */
+#video{
+  margin-top: 1em;
+}
+
+/* Not recommended: unnecessary line break */
+#video
+{
+  margin-top: 1em;
+}
+/* Recommended */
+#video {
+  margin-top: 1em;
+}
+```
+
+###Selector and Declaration Separation
+
+Separate selectors and declarations by new lines.
+Always start a new line for each selector and declaration.
+
+```css
+/* Not recommended */
+a:focus, a:active {
+	position: relative; top: 1px;
+}
+/* Recommended */
+h1,
+h2,
+h3 {
+	font-weight: normal;
+	line-height: 1.2;
+}
+```
+
+###Rule Separation
+
+Separate rules by new lines.
+Always put a blank line (two line breaks) between rules.
+
+```css
+html {
+	background: #fff;
+}
+
+body {
+	margin: auto;
+	width: 50%;
+}
+```
+
+###CSS Quotation Marks
+
+Use single quotation marks for attribute selectors and property values.
+Use single ('') rather than double ("") quotation marks for attribute selectors or property values. Do not use quotation marks in URI values (url()).
+
+Exception: If you do need to use the @charset rule, use double quotation marks—single quotation marks are not permitted.
+
+```css
+/* Not recommended */
+@import url("//www.google.com/css/maia.css");
+
+html {
+	font-family: "open sans", arial, sans-serif;
+}
+/* Recommended */
+@import url(//www.google.com/css/maia.css);
+
+html {
+	font-family: 'open sans', arial, sans-serif;
+}
+```
+
+##CSS Meta Rules
+
+###Section Comments
+
+Group sections by a section comment (optional).
+If possible, group style sheet sections together by using comments. Separate sections with new lines.
+
+
+```css
+/* Header */
+
+#adw-header {}
+
+/* Footer */
+
+#adw-footer {}
+
+/* Gallery */
+
+.adw-gallery {}
+```
+
+###Parting Words
+
+Be consistent.
+
+If you’re editing code, take a few minutes to look at the code around you and determine its style. If they use spaces around all their arithmetic operators, you should too. If their comments have little boxes of hash marks around them, make your comments have little boxes of hash marks around them too.
+
+The point of having style guidelines is to have a common vocabulary of coding so people can concentrate on what you’re saying rather than on how you’re saying it. We present global style rules here so people know the vocabulary, but local style is also important. If code you add to a file looks drastically different from the existing code around it, it throws readers out of their rhythm when they go to read it. Avoid this.
+
+
+
+
+
+
 
