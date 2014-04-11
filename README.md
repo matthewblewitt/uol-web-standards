@@ -1,5 +1,13 @@
 #University of Leeds Web Standards
 
+### Table of Contents
+
+* List Item `Inline Code`
+* List Item
+* List Item
+* List Item
+* [Projects](/accessibility/)
+
 ##Heading 2
 
 ###Heading 3
@@ -24,15 +32,6 @@
 }
 ```
 
-Different CSS preprocessors have different features, functionality, and syntax.
-Your conventions should be extended to accommodate the particularities of any
-preprocessor in use. The following guidelines are in reference to Sass.
-
-* List Item `Inline Code`
-* List Item
-* List Item
-* List Item
-* [Projects](/sections/accessibilityins.md)
   
 ```scss
 
