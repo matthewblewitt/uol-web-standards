@@ -6,5 +6,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer bibendum molest
 
 * [CSS](css.md)
 * [HTML](html.md)
-* [Javascript/jQuery](javascript.md)
+* [Javascript](javascript.md)
+* [jQuery](jquery.md)
 
