@@ -1,18 +1,17 @@
 #University of Leeds Web Standards
 
+##Introduction
+
 ### Table of Contents
 
-* List Item `Inline Code`
-* List Item
-* List Item
-* List Item
-* [Projects](/accessibility/)
+* [Accessibility](/accessibility/)
+* [Analytics Integration](/analytics-integration/)
+* [Best Practices](/best-practices/)
+* [Social Media Integration](/social-media-integration/)
+* [Style Guides](/style-guides/)
+* [Support Strategy](/support-strategy/)
+* [Testing Strategy](/testing-strategy/)
 
-##Heading 2
-
-###Heading 3
-
-####Heading 4
 
 ```html
 <div class="awesome">
@@ -31,7 +30,6 @@
         2px 2px 1px 1px #ccc inset;
 }
 ```
-
   
 ```scss
 
