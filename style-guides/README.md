@@ -4,6 +4,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer bibendum molest
 
 ### Table of Contents
 
-* [CSS](/css.md)
-* [HTML](/html.md)
-* [Javascript/jQuery](/javascript.md)
+* [CSS](css.md)
+* [HTML](html.md)
+* [Javascript/jQuery](javascript.md)
