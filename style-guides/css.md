@@ -103,6 +103,36 @@ Using functional or generic names reduces the probability of unnecessary documen
 .alt {}
 ```
 
+###Specificity (classes vs. ids)
+
+Elements that occur exactly once inside a page should use IDs, otherwise, use classes. When in doubt, use a class name.
+
+Good candidates for ids: header, footer, modal popups.
+Bad candidates for ids: navigation, item listings, item view pages (ex: issue view).
+
+When styling a component, start with an element + class namespace (prefer class names over ids), prefer direct descendant selectors by default, and use as little specificity as possible. Here is a good example:
+
+```html
+<ul class="category-list">
+  <li class="item">Category 1</li>
+  <li class="item">Category 2</li>
+  <li class="item">Category 3</li>
+</ul>
+```
+
+```sass
+ul.category-list { // element + class namespace
+
+  &>li { // direct descendant selector > for list items
+    list-style-type: disc;
+  }
+
+  a { // minimal specificity for all links
+    color: #ff0000;
+  }
+}
+```
+
 ###ID and Class Name Style
 
 Use ID and class names that are as short as possible but as long as necessary.
@@ -280,6 +310,11 @@ I also leave five carriage returns between each section, for example:
 
 This means that when scrolling quickly through my stylesheet I know that any gaps in the code are likely to be new sections.
 
+###CSS in Javascript - Should we do this???
+
+Never reference js- prefixed class names from CSS files. js- are used exclusively from JS files.
+
+Use the is- prefix for state rules that are shared between CSS and JS.
 
 ###Hacks
 
