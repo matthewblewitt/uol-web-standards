@@ -74,11 +74,11 @@ But that is unecessary. The trick with BEM is knowing when something falls into 
 
 ##Style Rules
 
-###Specificity - Should we use id's to style elements?
+###Specificity - Should we use ID's to style elements?
 
 It's generally best to style with classes. This is what OOCSS and SMACSS and modern writing about CSS is teaching. Not just "use classes smartly" but also "don't use ID's". 
 
-ID's are much more specific than classes. The difference is so big it can get out of control quickly in CSS. If you agree with yourself and team to never use them, you don't get in these arms races. These override predicaments can always be solved another way - through code refactoring and nesting a class.
+ID's are 255 times more specific than classes. The difference is so big it can get out of control quickly in CSS. If you agree with yourself and team to never use them, you don't get in these arms races. These override predicaments can always be solved another way - through code refactoring and nesting a class.
 
 ###When to use ID's
 
@@ -232,6 +232,12 @@ Do not concatenate words and abbreviations in selectors by any characters (inclu
 .ads-sample {}
 ```
 
+### A note on !important
+
+It is okay to use !important on helper classes only. To add !important preemptively is fine, e.g. .error { color: red !important }, as you know you will always want this rule to take precedence.
+
+Using !important reactively, e.g. to get yourself out of nasty specificity situations, is not advised. Rework your CSS and try to combat these issues by refactoring your selectors. Keeping your selectors short and avoiding IDs will help out here massively.
+
 ###Comments
 
 ####Table of contents
@@ -287,11 +293,18 @@ I also leave five carriage returns between each section, for example:
 
 This means that when scrolling quickly through my stylesheet I know that any gaps in the code are likely to be new sections.
 
-###CSS in Javascript - Should we do this???
+###Classes in Javascript - JS hooks
 
-Never reference js- prefixed class names from CSS files. js- are used exclusively from JS files.
+Never use a CSS styling class as a JavaScript hook. Attaching JS behaviour to a styling class means that we can never have one without the other.
 
-Use the is- prefix for state rules that are shared between CSS and JS.
+If you need to bind to some markup use a JS specific CSS class. This is simply a class namespaced with .js-, e.g. .js-toggle, .js-drag-and-drop. This means that we can attach both JS and CSS to classes in our markup but there will never be any troublesome overlap.
+
+```html
+<th class="is-sortable  js-is-sortable">
+</th>
+```
+
+The above markup holds two classes; one to which you can attach some styling for sortable table columns and another which allows you to add the sorting functionality.
 
 ###Hacks
 
@@ -306,7 +319,7 @@ Alphabetize declarations.
 Put declarations in alphabetical order in order to achieve consistent code in a way that is easy to remember and maintain.
 
 ```css
-.class{
+.class {
 	background: fuchsia;
 	border: 1px solid;
 	-webkit-border-radius: 4px;
@@ -323,7 +336,7 @@ Put declarations in alphabetical order in order to achieve consistent code in a 
 Write vendor prefixes so that the values all line up vertically; this makes them quicker to scan and compare values.
 
 ```css
-.island{
+.island{ 
     padding:1.5em;
     margin-bottom:1.5em;
     -webkit-border-radius:4px;
@@ -458,6 +471,42 @@ html {
 
 html {
 	font-family: 'open sans', arial, sans-serif;
+}
+```
+
+###SASS Nested Selectors
+
+To prevent uncessary complied css output from sass indentation we follow the following rule:
+
+The Inception Rule: don’t go more than four levels deep.
+
+This basically means that you shouldn't be too specific or mimicking the DOM at any point. If you find yourself more than four levels deep, that's a red flag. Of course there are times when you'll be forced to go there, but it's not something you should be doing too much.
+
+```sass
+.header {}
+.header .site-nav {}
+.header .site-nav li {}
+.header .site-nav li a {}
+```
+Would be wholly unnecessary in normal CSS, so the following would be bad Sass:
+
+```sass
+.header {
+    .site-nav {
+        li {
+            a {}
+        }
+    }
+}
+```
+
+If you were to Sass this up you’d write it as:
+
+```sass
+.header {}
+.site-nav {
+    li {}
+    a {}
 }
 ```
 
