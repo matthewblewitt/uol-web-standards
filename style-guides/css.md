@@ -482,7 +482,7 @@ The Inception Rule: don’t go more than four levels deep.
 
 This basically means that you shouldn't be too specific or mimicking the DOM at any point. If you find yourself more than four levels deep, that's a red flag. Of course there are times when you'll be forced to go there, but it's not something you should be doing too much.
 
-```sass
+```css
 .header {}
 .header .site-nav {}
 .header .site-nav li {}
@@ -490,7 +490,7 @@ This basically means that you shouldn't be too specific or mimicking the DOM at 
 ```
 Would be wholly unnecessary in normal CSS, so the following would be bad Sass:
 
-```sass
+```css
 .header {
     .site-nav {
         li {
@@ -502,7 +502,7 @@ Would be wholly unnecessary in normal CSS, so the following would be bad Sass:
 
 If you were to Sass this up you’d write it as:
 
-```sass
+```css
 .header {}
 .site-nav {
     li {}
