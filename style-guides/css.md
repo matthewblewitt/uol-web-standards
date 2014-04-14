@@ -74,10 +74,20 @@ But that is unecessary. The trick with BEM is knowing when something falls into 
 
 ##Style Rules
 
+###Specificity - Should we use id's to style elements?
+
+It's generally best to style with classes. This is what OOCSS and SMACSS and modern writing about CSS is teaching. Not just "use classes smartly" but also "don't use ID's". 
+
+ID's are much more specific than classes. The difference is so big it can get out of control quickly in CSS. If you agree with yourself and team to never use them, you don't get in these arms races. These override predicaments can always be solved another way - through code refactoring and nesting a class.
+
+###When to use ID's
+
+ID's can be used as fragment identifiers for marking landmarks in the page (e.g. jump to content links in pages) and in Javascript.
+
 ###ID and Class Naming
 
 Use meaningful or generic ID and class names.
-Instead of presentational or cryptic names, always use ID and class names that reflect the purpose of the element in question, or that are otherwise generic.
+Instead of cryptic names, always use ID and class names that reflect the purpose of the element in question, or that are otherwise generic.
 
 Names that are specific and reflect the purpose of the element should be preferred as these are most understandable and the least likely to change.
 
@@ -89,51 +99,15 @@ Using functional or generic names reduces the probability of unnecessary documen
 /* Not recommended: meaningless */
 #yee-1901 {}
 
-/* Not recommended: presentational */
-.button-green {}
-.clear {}
-
 /* Recommended: specific */
 #gallery {}
-#login {}
+.login {}
 .video {}
 
 /* Recommended: generic */
 .aux {}
 .alt {}
 ```
-
-###Specificity (classes vs. ids)
-
-Elements that occur exactly once inside a page should use IDs, otherwise, use classes. When in doubt, use a class name.
-
-Good candidates for ids: header, footer, modal popups.
-Bad candidates for ids: navigation, item listings, item view pages (ex: issue view).
-
-When styling a component, start with an element + class namespace (prefer class names over ids), prefer direct descendant selectors by default, and use as little specificity as possible. Here is a good example:
-
-```html
-<ul class="category-list">
-  <li class="item">Category 1</li>
-  <li class="item">Category 2</li>
-  <li class="item">Category 3</li>
-</ul>
-```
-
-```sass
-ul.category-list { // element + class namespace
-
-  &>li { // direct descendant selector > for list items
-    list-style-type: disc;
-  }
-
-  a { // minimal specificity for all links
-    color: #ff0000;
-  }
-}
-```
-
-###ID and Class Name Style
 
 Use ID and class names that are as short as possible but as long as necessary.
 Try to convey what an ID or class is about while being as brief as possible.
@@ -142,12 +116,14 @@ Using ID and class names this way contributes to acceptable levels of understand
 
 ```css
 /* Not recommended */
-#navigation {}
+.navigation {}
 .atr {}
+
 /* Recommended */
-#nav {}
+.nav {}
 .author {}
 ```
+
 ###Type Selectors
 
 Avoid qualifying ID and class names with type selectors.
@@ -157,13 +133,14 @@ Avoiding unnecessary ancestor selectors is useful for performance reasons.
 
 ```css
 /* Not recommended */
-ul#example {}
+ul.example {}
 div.error {}
 
 /* Recommended */
-#example {}
+.example {}
 .error {}
 ```
+
 ###Shorthand Properties
 
 Use shorthand properties where possible.
