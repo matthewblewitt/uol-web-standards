@@ -12,5 +12,5 @@ These collection of documents are to be used as a reference for front-end develo
 * [Accessibility](/accessibility/)
 * [Analytics Integration](/analytics-integration/)
 * [Social Media Integration](/social-media-integration/)
-* [Support Strategy](/support-strategy/)
-* [Testing Strategy](/testing-strategy/)
+* [Testing Performance & Support](/testing-strategy/)
+
