@@ -15,29 +15,29 @@ We support current and previous versions of all modern browsers, IE8-9 & top-lev
 ####Desktop Browsers 
 
 * Internet Explorer
-  ** Supported: 8 to current version
-  ** Explicitly unsupported: 7 and earlier & IE on Mac OS X
+  * Supported: 8 to current version
+  * Explicitly unsupported: 7 and earlier & IE on Mac OS X
 * Firefox
-  ** Supported: 27 to current version
-  ** Explicitly unsupported: 6 and earlier
+    * Supported: 27 to current version
+    * Explicitly unsupported: 6 and earlier
 * Chrome
-  ** Supported: 32 to current version
+    * Supported: 32 to current version
 * Safari
-  ** Supported: 5 to current version
+    * Supported: 5 to current version
 * Opera
-  ** Supported: 12 to current version
-  ** Explicitly unsupported: 8 and earlier
+    * Supported: 12 to current version
+    * Explicitly unsupported: 8 and earlier
 * PlayStation 3/PSP/NetFront
-  ** Unsupported
+    * Unsupported
 * Other
-  ** Unsupported
+    * Unsupported
 
 ####Mobile Browsers
 
 * Android browser
-  ** Supported: 4.x, 3.x, and 2.3 (current versions)
+    * Supported: 4.x, 3.x, and 2.3 (current versions)
 * Mobile Safari
-  ** Supported: 5.0 and 5.1 (current versions)
+    * Supported: 5.0 and 5.1 (current versions)
 * BlackBerry Browser
 * Chrome
 * Firefox Mobile
