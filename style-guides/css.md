@@ -475,16 +475,18 @@ html {
 
 ####List @extend(s) First
 
+```sass
 .weather {
   @extends %module; 
   ...
 }
+```
 
 Knowing right off the bat that this class inherits another whole set of rules from elsewhere is good.
 
 ####List "Regular" Styles Next
 
-```scss
+```sass
 .weather {
   @extends %module; 
   background: LightCyan;
