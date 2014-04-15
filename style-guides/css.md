@@ -469,7 +469,59 @@ html {
 }
 ```
 
-###SASS Nested Selectors
+##SASS Guide
+
+###SASS order
+
+####List @extend(s) First
+
+.weather {
+  @extends %module; 
+  ...
+}
+
+Knowing right off the bat that this class inherits another whole set of rules from elsewhere is good.
+
+####List "Regular" Styles Next
+
+```scss
+.weather {
+  @extends %module; 
+  background: LightCyan;
+  ..
+}
+```
+
+####List @include(s) Next
+
+```scss
+.weather {
+  @extends %module; 
+  background: LightCyan;
+  @include transition(all 0.3s ease-out);
+  ...
+}
+```
+
+This visually separates the @extends and @includes as well as groups the @includes for easier reading. You might also want to make the call on separating user-authored @includes and vendor-provided @includes.
+
+####Nested Selectors Last
+
+```scss
+.weather {
+	@extends %module; 
+	background: LightCyan;
+	@include transition(all 0.3s ease);
+	> h3 {
+		border-bottom: 1px solid white;
+		@include transform(rotate(90deg));
+	}
+}
+```
+
+Nothing goes after the nested stuff. And the same order as above within the nested selector would apply.
+
+###Nested Selectors
 
 To prevent uncessary complied css output from sass indentation we follow the following rule:
 
@@ -485,7 +537,7 @@ This basically means that you shouldn't be too specific or mimicking the DOM at 
 ```
 Would be wholly unnecessary in normal CSS, so the following would be bad Sass:
 
-```css
+```scss
 .header {
     .site-nav {
         li {
@@ -497,7 +549,7 @@ Would be wholly unnecessary in normal CSS, so the following would be bad Sass:
 
 If you were to Sass this up you’d write it as:
 
-```css
+```scss
 .header {}
 .site-nav {
     li {}
@@ -505,27 +557,84 @@ If you were to Sass this up you’d write it as:
 }
 ```
 
-##CSS Meta Rules
+###Use semantic variable names
 
-###Section Comments
+Imagine for a moment that you client's primary brand color is red and you called that variable $red. Six months go by and the marketing department decides to re-brand the company and the primary brand color is now blue.
 
-Group sections by a section comment (optional).
-If possible, group style sheet sections together by using comments. Separate sections with new lines.
+Changing the value of $red is easy enough, but the variable has no description of its intended purpose.
 
+Instead of describing what a variable looks like in the name, describe its function or purpose. In other words, try to choose semantic names for your variables.
 
-```css
-/* Header */
+```scss
+// Bad
+$red: red;
+$yellow: yellow;
 
-#adw-header {}
-
-/* Footer */
-
-#adw-footer {}
-
-/* Gallery */
-
-.adw-gallery {}
+// Better
+$brand-color: red;
+$accent-color: yellow;
 ```
+
+###Variablize All Common Numbers, and Numbers with Meaning
+
+If you find yourself using a number other than 0 or 100% over and over, it likely deserves a variable. Since it likely has meaning and controls consistency, being able to tweak it enmasse may be useful.
+
+If a number clearly has strong meaning, that's a use case for variablizing as well.
+
+```scss
+$zHeader: 2000;
+$zOverlay: 5000;
+$zMessage: 5050;
+
+.header {
+  z-index: $zHeader;
+}
+.overlay {
+  z-index: $zOverlay;
+}
+.message {
+  z-index: $zMessage;
+}
+```
+
+Those numbers are probably in a separate file @import-ed as a dependency. That way you can keep track of your whole z-index stack in one place.
+
+###Variablize All Colors
+
+Except perhaps white and black. Chances are a color isn't one-off, and even if you think it is, once it's in a variable you might see uses for it elsewhere. Variations on that color can often be handled by the Sass color functions like lighten() and darken() - which make updating colors easier (change in one place, whole color scheme updates).
+
+###Nest and Name Your Media Queries
+
+The ability to nest media queries in Sass means 1) you don't have to re-write the selector somewhere else which can be error prone 2) the rules that you are overriding are very clear and obvious, which is usually not the case when they are at the bottom of your CSS or in a different file.
+
+```scss
+.sidebar {
+  float: right;
+  width: 33.33%;
+  @include bp(mama-bear) {
+    width: 25%;
+  }
+}
+```
+
+More on this and the importance of naming them well.
+
+###Shame Last
+
+In your global stylesheet, @import a _shame.scss file last.
+
+```scss
+@import "compass"
+
+...
+
+@import "shame"
+```
+
+If you need to make a quick fix, you can do it here. Later when you have proper time, you can move the fix into the proper structure/organization. See more.
+
+####Partials are named _partial.scss
+This is a common naming convention that indicates this file isn't meant to be compiled by itself. It likely has dependancies that would make it impossible to compile by itself. Personally I like dashes in the "actual" filename though, like _dropdown-menu.scss.
 
 ###Parting Words
 
