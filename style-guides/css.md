@@ -9,7 +9,7 @@ This document defines formatting and style rules CSS. It aims at improving colla
 * [Style Rules](#style-rules)
 	* [Style Rules](#style-rules)
 * [CSS Formatting Rules](#css-formatting-rules)
-* [CSS Meta Rules](#css-meta-rules)
+* [SASS Guide](#sass-guide)
 
 ##BEM Syntax
 
