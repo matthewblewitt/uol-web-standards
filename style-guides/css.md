@@ -203,22 +203,9 @@ For color values that permit it, 3 character hexadecimal notation is shorter and
 	color: #ebc;
 }
 ```
-
-###Prefixes
-
-Prefix selectors with an application-specific prefix (optional).
-In large projects as well as for code that gets embedded in other projects or on external sites use prefixes (as namespaces) for ID and class names. Use short, unique identifiers followed by a dash.
-
-Using namespaces helps preventing naming conflicts and can make maintenance easier, for example in search and replace operations.
-
-```css
-.adw-help {} /* AdWords */
-#maia-note {} /* Maia */
-```
-
 ###ID and Class Name Delimiters
 
-Separate words in ID and class names by a hyphen.
+Separate words in classes names by a hyphen. Separate words in ID's names by a underscore.
 Do not concatenate words and abbreviations in selectors by any characters (including none at all) other than hyphens, in order to improve understanding and scannability.
 
 ```css
@@ -227,8 +214,9 @@ Do not concatenate words and abbreviations in selectors by any characters (inclu
 
 /* Not recommended: uses underscore instead of hyphen */
 .error_status {}
+
 /* Recommended */
-#video-id {}
+#video_id {}
 .ads-sample {}
 ```
 
@@ -242,24 +230,26 @@ Using !important reactively, e.g. to get yourself out of nasty specificity situa
 
 ####Table of contents
 
-At the top of my CSS files I have a table of contents that maps to the section titles in the document, it looks a little like:
+At the top of CSS files create a table of contents that maps to the section titles in the document, here's an example:
 
 ```css
 /*------------------------------------*\
-    CONTENTS
+    $CONTENTS
 \*------------------------------------*/
-/*
-NOTES
-RESET
-SHARED     Share anything we can across elements.
-MAIN       HTML, BODY, etc.
-*/
-
+/**
+ * CONTENTS............You’re reading it!
+ * RESET...............Set our reset defaults
+ * FONT-FACE...........Import brand font files
+ */
 ```
+
+This will tell the next developer(s) exactly what they can expect to find in this file. Each item in the table of contents maps directly to a section title.
+
+If you are working in one big stylesheet, the corresponding section will also be in that file. If you are working across multiple files then each item in the table of contents will map to an include which pulls that section in.
 
 ####Section titles
 
-I denote each section (layout, type, tables etc) of my CSS thus:
+Denote each section (layout, type, tables etc) of CSS thus:
 
 ```css
 /*------------------------------------*\
@@ -267,7 +257,7 @@ I denote each section (layout, type, tables etc) of my CSS thus:
 \*------------------------------------*/
 ```
 
-This section heading is also prepended with a $. This is so that--when I do a find for a section--I actually do a find for $MAIN and not MAIN. This means that I’m only ever searching within section headings. A search for $MAIN will only ever find me a section with that name whereas a search for MAIN could find me something like:
+This section heading is prepended with a `$`. This is so that--when you search for a section--you actually searchd for $MAIN and not MAIN. This means that you are only ever searching within section headings. A search for $MAIN will only ever find a section with that name whereas a search for MAIN could find something like:
 
 ```css
 .s{
@@ -281,17 +271,22 @@ I also leave five carriage returns between each section, for example:
 
 ```css
 /*------------------------------------*\
-    $MAIN
+    $RESET
 \*------------------------------------*/
-```
-    
-```css    
+[Our
+reset
+styles]
+
+
+
+
+
 /*------------------------------------*\
-    $TYPE
+    $FONT-FACE
 \*------------------------------------*/
 ```
 
-This means that when scrolling quickly through my stylesheet I know that any gaps in the code are likely to be new sections.
+This means that when scrolling quickly through a stylesheet you know that any gaps in the code are likely to be new sections.
 
 ###Classes in Javascript - JS hooks
 
