@@ -475,9 +475,9 @@ html {
 
 ####List @extend(s) First
 
-```sass
+```scss
 .weather {
-  @extends %module; 
+  @extend %module; 
   ...
 }
 ```
@@ -486,9 +486,9 @@ Knowing right off the bat that this class inherits another whole set of rules fr
 
 ####List "Regular" Styles Next
 
-```sass
+```scss
 .weather {
-  @extends %module; 
+  @extend %module; 
   background: LightCyan;
   ..
 }
@@ -498,20 +498,20 @@ Knowing right off the bat that this class inherits another whole set of rules fr
 
 ```scss
 .weather {
-  @extends %module; 
+  @extend %module; 
   background: LightCyan;
   @include transition(all 0.3s ease-out);
   ...
 }
 ```
 
-This visually separates the @extends and @includes as well as groups the @includes for easier reading. You might also want to make the call on separating user-authored @includes and vendor-provided @includes.
+This visually separates the @extend and @include as well as groups the @include for easier reading. You might also want to make the call on separating user-authored @include and vendor-provided @include.
 
 ####Nested Selectors Last
 
 ```scss
 .weather {
-	@extends %module; 
+	@extend %module; 
 	background: LightCyan;
 	@include transition(all 0.3s ease);
 	> h3 {
