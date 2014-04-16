@@ -72,6 +72,184 @@ But that is unecessary. The trick with BEM is knowing when something falls into 
 
 ***
 
+##The Principles Of OOCSS
+
+As with any object-based coding method, the purpose of OOCSS is to encourage code reuse and, ultimately, faster and more efficient stylesheets that are easier to add to and maintain.
+
+As described on the OOCSS GitHub repo’s Wiki page, OOCSS is based on two main principles.
+
+###Seperate Structure from Skin
+
+Almost every element on a styled Web page has different visual features (i.e. “skins”) that are repeated in different contexts. Think of a website’s branding — the colors, subtle uses of gradients, or visible borders. On the other hand, other generally invisible features (i.e. “structure”) are likewise repeated.
+
+When these different features are abstracted into class-based modules, they become reusable and can be applied to any element and have the same basic result. Let’s compare some before and after code so you can see what I’m talking about.
+
+Before applying OOCSS principles, you might have CSS that looks like this:
+
+```css
+#button {
+	width: 200px;
+	height: 50px;
+	padding: 10px;
+	border: solid 1px #ccc;
+	background: linear-gradient(#ccc, #222);
+	box-shadow: rgba(0, 0, 0, .5) 2px 2px 5px;
+}
+
+#box {
+	width: 400px;
+	overflow: hidden;
+	border: solid 1px #ccc;
+	background: linear-gradient(#ccc, #222);
+	box-shadow: rgba(0, 0, 0, .5) 2px 2px 5px;
+}
+
+#widget {
+	width: 500px;
+	min-height: 200px;
+	overflow: auto;
+	border: solid 1px #ccc;
+	background: linear-gradient(#ccc, #222);
+	box-shadow: rgba(0, 0, 0, .5) 2px 2px 5px;
+}
+```
+
+The three elements above have styles that are unique to each, and they’re applied with the non-reusable ID selector to define the styles. But they also have a number of styles in common. The common styles might exist for branding purposes or consistency of design.
+
+With a little bit of planning and forethought, we can abstract the common styles so the CSS would end up instead like this:
+
+```css
+.button {
+	width: 200px;
+	height: 50px;
+}
+
+.box {
+	width: 400px;
+	overflow: hidden;
+}
+
+.widget {
+	width: 500px;
+	min-height: 200px;
+	overflow: auto;
+}
+
+.skin {
+	border: solid 1px #ccc;
+	background: linear-gradient(#ccc, #222);
+	box-shadow: rgba(0, 0, 0, .5) 2px 2px 5px;
+}
+```
+
+Now all the elements are using classes, the common styles are combined into a reusable “skin” and nothing is unnecessarily repeated. We just need to apply the “skin” class to all the elements and the result will be the same as what the first example would produce, except with less code and a possiblity for further reuse.
+
+###Seperate Containers from Content
+
+The second principle described on the OOCSS GitHub wiki page is the separation of containers from their content. To illustrate why this is important, take the following CSS:
+
+```css
+#sidebar h3 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: .8em;
+	line-height: 1;
+	color: #777;
+	text-shadow: rgba(0, 0, 0, .3) 3px 3px 6px;
+}
+```
+
+These styles will apply to any third-level headings that are children of the `#sidebar` element. But what if we want to apply the exact same styles to third-level headings that appear in the footer, with the exception of a different font size and a modified text shadow?
+
+Then we would need to do something like this:
+
+```css
+#sidebar h3, #footer h3 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 2em;
+	line-height: 1;
+	color: #777;
+	text-shadow: rgba(0, 0, 0, .3) 3px 3px 6px;
+}
+
+#footer h3 {
+	font-size: 1.5em;
+	text-shadow: rgba(0, 0, 0, .3) 2px 2px 4px;
+}
+```
+Or we might end up with something worse:
+
+```css
+#sidebar h3 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 2em;
+	line-height: 1;
+	color: #777;
+	text-shadow: rgba(0, 0, 0, .3) 3px 3px 6px;
+}
+
+/* other styles here.... */
+
+#footer h3 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1.5em;
+	line-height: 1;
+	color: #777;
+	text-shadow: rgba(0, 0, 0, .3) 2px 2px 4px;
+}
+```
+Now we’re unnecessarily duplicating styles, and might not realize it (or simply don’t care). With OOCSS, we’re encouraged to give more forethought to what is common among different elements, then separate those common features into modules, or objects, that can be reused anywhere.
+
+The styles that are declared using the descendant selector in those above examples are not reusable, because they are dependent on a particular container (in this case either the sidebar or the footer).
+
+When we use OOCSS’s class-based module building, we ensure that our styles are not dependent on any containing element. This means they can then be reused anywhere in the document, regardless of structural context.
+
+###The Media Object
+
+One of the pioneers of the OOCSS movement is Nicole Sullivan. She’s created a reusable module called the media object which, as she explains, can save hundreds of lines of code.
+
+The media object is a great example of the power of OOCSS because it can contain a media element of any size with content to its right. Although many of the styles that apply to the content inside of it — and even the size of the media element itself — could change, the media object itself has common base styles that help avoid needless repetition.
+
+####Implementation Details
+
+How does it work? The hard part is making sure that the image can be any width, so that the element is reusable. It means our content area needs to be flexible so that it can fill in all the remaining space available. We’ll have to create a new formatting context to make a flexible column.
+
+The HTML:
+
+```html
+<div class="media attribution">
+
+  <a href="http://twitter.com/stubbornella" class="img">
+    <img src="http://stubbornella.com/profile_image.jpg" alt="me" />
+  </a>
+
+  <div class="bd">
+    @Stubbornella 14 minutes ago
+  </div>
+
+</div>
+```
+
+The CSS:
+
+```css
+/* ====== media ====== */
+.media {margin:10px;}
+.media, .bd {overflow:hidden; _overflow:visible; zoom:1;}
+.media .img {float:left; margin-right: 10px;}
+.media .img img{display:block;}
+.media .imgExt{float:right; margin-left: 10px;}
+```
+
+We clearfix both the wrapper element, media, and the inner content wrapper, bd (body) using the secret benefits of overflow. There are other ways we could have implemented the clearfix plus new formatting context. More on that in a later post.
+
+Then we float our image wrapper (generally a link) left and our optional right region to the right.
+
+Finally, we set some margins and paddings to keep everything lining up nicely. You might choose to set margins via a class which extends the .img object if you have several different kinds of images with different spacing and decoration.
+
+Voila, we’re done. It is a very simple object, but it is very powerful. We can eliminate a lot of lines of code abstracting this repeating pattern. The code for the media block and many other “web Lego” are available on the Object Oriented CSS open source project.
+
+***
+
 ##Style Rules
 
 ###Specificity - Should we use ID's to style elements?
