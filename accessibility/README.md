@@ -3,7 +3,9 @@
 Objective: Comply with the [Disability Discrimination Act (DDA)](http://www
 .shaw-trust.org.uk/about-us/facts-about-disability/disability-discrimination-
 act-your-obligations-as-an-employer/) and promote a culture of accessibility
-and inclusion.
+and inclusion. 
+
+See also the [Web Content Accessibility Guidelines 2.0 Checklist](http://www.w3.org/TR/2006/WD-WCAG20-20060427/appendixB.html) which serves as an appendix to Web Content Accessibility Guidelines 2.0 [WCAG20]
 
 The W3C offers three different levels of compliance.
 
@@ -30,6 +32,16 @@ graphical buttons, sounds (played with or without user interaction), stand-
 alone audio files, audio tracks of video, and video.
 
 [WC3 1.1](http://www.w3.org/TR/WCAG10/wai-pageauth.html#tech-text-equivalent)
+
+
+Captions must be provided for prerecorded multimedia
+
+[WC3 1.2](http://www.w3.org/TR/2006/WD-WCAG20-20060427/guidelines.html#media-equiv)
+
+Audio descriptions of video, or a full multimedia text alternative including any interaction, are provided for prerecorded multimedia.
+
+[WC3 1.2.2](http://www.w3.org/TR/UNDERSTANDING-WCAG20/Overview.html#media-equiv-audio-desc)
+
 
   2. Ensure that all information conveyed with color is also available without color, for example from context or markup. 
 
