@@ -6,10 +6,11 @@ This document defines formatting and style rules CSS. It aims at improving colla
 ###Table of Contents
 
 * [BEM Syntax](#bem-syntax)
+* [The Principles Of OOCSS](#the-principles-of-oocss)
 * [Style Rules](#style-rules)
-	* [Style Rules](#style-rules)
 * [CSS Formatting Rules](#css-formatting-rules)
 * [SASS Guide](#sass-guide)
+* [Parting Words](#parting-words)
 
 ##BEM Syntax
 
@@ -816,7 +817,7 @@ If you need to make a quick fix, you can do it here. Later when you have proper 
 ####Partials are named _partial.scss
 This is a common naming convention that indicates this file isn't meant to be compiled by itself. It likely has dependancies that would make it impossible to compile by itself. Personally I like dashes in the "actual" filename though, like _dropdown-menu.scss.
 
-###Parting Words
+##Parting Words
 
 Be consistent.
 
